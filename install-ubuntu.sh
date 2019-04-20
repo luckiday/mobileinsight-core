@@ -43,7 +43,7 @@ fi
 
 echo "Configuring Wireshark sources for ws_dissector compilation..."
 cd ${WIRESHARK_SRC_PATH}
-cmake --disable-wireshark . > /dev/null 2>&1
+cmake --disable-wireshark .
 if [[ $? != 0 ]]; then
     echo "Error when executing '${WIRESHARK_SRC_PATH}/configure --disable-wireshark'."
     echo "You need to manually fix it before continuation. Exiting with status 3"
@@ -77,14 +77,14 @@ fi
 
 if [ "$FindWiresharkLibrary" = false ] ; then
     echo "Compiling wireshark-${ws_ver} from source code, it may take a few minutes..."
-    make -j $(grep -c ^processor /proc/cpuinfo) > /dev/null 2>&1
+    make -j $(grep -c ^processor /proc/cpuinfo)
     if [[ $? != 0 ]]; then
         echo "Error when compiling wireshark-${ws_ver} from source code'."
         echo "You need to manually fix it before continuation. Exiting with status 2"
         exit 2
     fi
     echo "Installing wireshark-${ws_ver}"
-    sudo make install > /dev/null 2>&1
+    sudo make install
     if [[ $? != 0 ]]; then
         echo "Error when installing wireshark-${ws_ver} compiled from source code'."
         echo "You need to manually fix it before continuation. Exiting with status 2"
