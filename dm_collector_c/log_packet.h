@@ -14,19 +14,19 @@
 
 // Field types
 enum FmtType {
-    UINT,       // Little endian. len = 1, 2, 4, 8
+    UINT,    // Little endian. len = 1, 2, 4, 8
     UINT_BIG_ENDIAN,    // Big endian uint
     BYTE_STREAM,    // A stream of bytes.
-    BYTE_STREAM_LITTLE_ENDIAN,  // a stream of bytes in little endian
-    QCDM_TIMESTAMP, // Timestamp in all messages. len = 8
-    PLMN_MK1,   // in WCDMA Cell ID
-    PLMN_MK2,   // in LTE NAS EMM State
-    BANDWIDTH,  // in LTE RRC Serving Cell Info, LTE RRC MIB Message
+    BYTE_STREAM_LITTLE_ENDIAN,    // a stream of bytes in little endian
+    QCDM_TIMESTAMP,    // Timestamp in all messages. len = 8
+    PLMN_MK1,    // in WCDMA Cell ID
+    PLMN_MK2,    // in LTE NAS EMM State
+    BANDWIDTH,    // in LTE RRC Serving Cell Info, LTE RRC MIB Message
     RSRP,
     RSRQ,
-    SKIP,   // This field is ignored (but bytes are consumed)
-    PLACEHOLDER, // This field is created with a dummy value (no byte is consumed)
-    WCDMA_MEAS, // Used for RSCP/RSSI/ECN0 in LTE_PHY_IRAT_MDB
+    SKIP,    // This field is ignored (but bytes are consumed)
+    PLACEHOLDER,    // This field is created with a dummy value (no byte is consumed)
+    WCDMA_MEAS,    // Used for RSCP/RSSI/ECN0 in LTE_PHY_IRAT_MDB
 };
 
 struct Fmt {
@@ -48,14 +48,14 @@ const Fmt LogPacketHeaderFmt[] = {
 const Fmt WcdmaCellIdFmt[] = {
         {UINT,     "Uplink RF channel number",                  4},    //Uplink RF channel number
         {UINT,     "Download RF channel number",                4},    //Download RF channel number
-        {UINT,     "Cell ID",                                   4},               //Cell ID
-        {UINT,     "UTRA registration area (overlapping URAs)", 1}, // UTRA registration area (overlapping URAs)
+        {UINT,     "Cell ID",                                   4},    //Cell ID
+        {UINT,     "UTRA registration area (overlapping URAs)", 1},    // UTRA registration area (overlapping URAs)
         {SKIP,     NULL,                                        2},    // Unknown yet
-        {UINT,     "Allowed call access",                       1},   //Allowed call access
-        {UINT,     "PSC",                                       2},   //PSC
-        {PLMN_MK1, "PLMN",                                      6},  //PLMN
+        {UINT,     "Allowed call access",                       1},    //Allowed call access
+        {UINT,     "PSC",                                       2},    //PSC
+        {PLMN_MK1, "PLMN",                                      6},    //PLMN
         {UINT,     "LAC",                                       4},    //Location area code
-        {UINT,     "RAC",                                       4}     //routing area code
+        {UINT,     "RAC",                                       4}    //routing area code
 };
 
 // ------------------------------------------------------------
@@ -97,7 +97,7 @@ const ValueName WcdmaSignalingMsgChannelType[] = {
         {0x04, "RRC_DL_BCCH_BCH"},
         {0x06, "RRC_DL_PCCH"},
         {0x09, "Extension SIB"},
-        {0x84, "RRC_DL_BCCH_BCH"},  // Qualcom makes duplicate constant?
+        {0x84, "RRC_DL_BCCH_BCH"},    // Qualcom makes duplicate constant?
         {0xfe, "RRC_COMPLETE_SIB"},
 };
 
@@ -215,105 +215,105 @@ const ValueName UmtsNasOtaFmt_MessageDirection[] = {
 // ------------------------------------------------------------
 // LTE_RRC_OTA_Packet
 const Fmt LteRrcOtaPacketFmt[] = {
-        {UINT, "Pkt Version",        1},           //version
+        {UINT, "Pkt Version",        1},    //version
         {UINT, "RRC Release Number", 1},    //RRC release version
         {UINT, "Major/minor",        1},
-        {UINT, "Radio Bearer ID",    1},       //no change
-        {UINT, "Physical Cell ID",   2}       //Cell ID
+        {UINT, "Radio Bearer ID",    1},    //no change
+        {UINT, "Physical Cell ID",   2}    //Cell ID
         // continued in LteRrcOtaPacketFmt_v2 or LteRrcOtaPacketFmt_v7
 };
 
 // Apply to version 2 packets
 const Fmt LteRrcOtaPacketFmt_v2[] = {
-        {UINT, "Freq",                    2},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    2},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "Msg Length",              1},
         {UINT, "SIB Mask in SI",          1}
 };
 
 const Fmt LteRrcOtaPacketFmt_v4[] = {
-        {UINT, "Freq",                    2},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    2},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "Msg Length",              2},
 };
 
 const Fmt LteRrcOtaPacketFmt_v7[] = {
-        {UINT, "Freq",                    2},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
-        {SKIP, NULL,                      4},            // Unknown yet, only for Pkt Version = 7
+        {UINT, "Freq",                    2},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
+        {SKIP, NULL,                      4},    // Unknown yet, only for Pkt Version = 7
         {UINT, "Msg Length",              1},
         {UINT, "SIB Mask in SI",          1}
 };
 
 const Fmt LteRrcOtaPacketFmt_v8[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v9[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v12[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v13[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v15[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v19[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          4},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v20[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          1},
         {SKIP, NULL,                      3},
         {UINT, "Msg Length",              2}
 };
 
 const Fmt LteRrcOtaPacketFmt_v24[] = {
-        {UINT, "Freq",                    4},                  //frequency
-        {UINT, "SysFrameNum/SubFrameNum", 2},   //System/subsystem frame number
-        {UINT, "PDU Number",              1},            //PDU number
+        {UINT, "Freq",                    4},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum", 2},    //System/subsystem frame number
+        {UINT, "PDU Number",              1},    //PDU number
         {UINT, "SIB Mask in SI",          4},
         {UINT, "Msg Length",              2}
 };
@@ -399,13 +399,13 @@ const Fmt LteNasEsmStateFmt_v1[] = {
 };
 
 const ValueName LteNasEmmState_v2_EmmState[] = {
-        {0, "EMM_NULL"},                    // No substate
-        {1, "EMM_DEREGISTERED"},            // Substate table: Deregistered
+        {0, "EMM_NULL"},    // No substate
+        {1, "EMM_DEREGISTERED"},    // Substate table: Deregistered
         {2, "EMM_REGISTERED_INITIATED"},    // Substate table: Registered_Initiated
-        {3, "EMM_REGISTERED"},              // Substate table: Registered
+        {3, "EMM_REGISTERED"},    // Substate table: Registered
         {4, "EMM_TRACKING_AREA_UPDATING_INITIATED"},    // The same as above
-        {5, "EMM_SERVICE_REQUEST_INITIATED"},   // The same as above
-        {6, "EMM_DEREGISTERED_INITIATED"}       // No substate
+        {5, "EMM_SERVICE_REQUEST_INITIATED"},    // The same as above
+        {6, "EMM_DEREGISTERED_INITIATED"}    // No substate
 };
 
 const ValueName LteNasEmmState_v2_EmmSubstate_Deregistered[] = {
@@ -451,9 +451,9 @@ const Fmt LtePhyPdschDemapperConfigFmt_v23[] = {
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 0[1]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[0]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[1]",  8},
-        {UINT,                      "Frequency Selective PMI",  1},   // right shift 1 bit, 2 bits
-        {PLACEHOLDER,               "PMI Index",                0},  // 4 bits
-        {UINT,                      "Transmission Scheme",      1},   // 4 bits
+        {UINT,                      "Frequency Selective PMI",  1},    // right shift 1 bit, 2 bits
+        {PLACEHOLDER,               "PMI Index",                0},    // 4 bits
+        {UINT,                      "Transmission Scheme",      1},    // 4 bits
         {SKIP,                      NULL,                       2},
         // {UINT, "Transport Block Size Stream 0", 2},
         {UINT,                      "TBS 0",                    2},
@@ -480,9 +480,9 @@ const Fmt LtePhyPdschDemapperConfigFmt_v28[] = {
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 0[1]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[0]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[1]",  8},
-        {UINT,                      "Frequency Selective PMI",  1},   // right shift 1 bit, 2 bits
-        {PLACEHOLDER,               "PMI Index",                0},  // 4 bits
-        {UINT,                      "Transmission Scheme",      1},   // 4 bits
+        {UINT,                      "Frequency Selective PMI",  1},    // right shift 1 bit, 2 bits
+        {PLACEHOLDER,               "PMI Index",                0},    // 4 bits
+        {UINT,                      "Transmission Scheme",      1},    // 4 bits
 
         {UINT,                      "Repetition Index Data",    2},
 
@@ -520,9 +520,9 @@ const Fmt LtePhyPdschDemapperConfigFmt_v103[] = {
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 0[1]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[0]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[1]",  8},
-        {UINT,                      "Frequency Selective PMI",  1},   // right shift 1 bit, 2 bits
-        {PLACEHOLDER,               "PMI Index",                0},  // 4 bits
-        {UINT,                      "Transmission Scheme",      1},   // 4 bits
+        {UINT,                      "Frequency Selective PMI",  1},    // right shift 1 bit, 2 bits
+        {PLACEHOLDER,               "PMI Index",                0},    // 4 bits
+        {UINT,                      "Transmission Scheme",      1},    // 4 bits
         {SKIP,                      NULL,                       2},
         {UINT,                      "TBS 0",                    2},
         {UINT,                      "MCS 0",                    2},
@@ -548,9 +548,9 @@ const Fmt LtePhyPdschDemapperConfigFmt_v104[] = {
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 0[1]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[0]",  8},
         {BYTE_STREAM_LITTLE_ENDIAN, "RB Allocation Slot 1[1]",  8},
-        {UINT,                      "Frequency Selective PMI",  1},   // right shift 1 bit, 2 bits
-        {PLACEHOLDER,               "PMI Index",                0},  // 4 bits
-        {UINT,                      "Transmission Scheme",      1},   // 4 bits
+        {UINT,                      "Frequency Selective PMI",  1},    // right shift 1 bit, 2 bits
+        {PLACEHOLDER,               "PMI Index",                0},    // 4 bits
+        {UINT,                      "Transmission Scheme",      1},    // 4 bits
         {SKIP,                      NULL,                       2},
         {UINT,                      "TBS 0",                    2},
         {UINT,                      "MCS 0",                    2},
@@ -634,7 +634,7 @@ const Fmt LtePhyPdschDemapperConfigFmt_header_144[] = {
         {UINT,        "Carrier Index",  4},    // shift 0 bits,total 4 bits
         {PLACEHOLDER, "Num of Records", 0},    // shift 4 bits,total 8 bits
         {SKIP,        NULL,             3},
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 12 bits,total 44 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 12 bits,total 44 bits
 };
 
 const Fmt LtePhyPdschDemapperConfigFmt_v144[] = {
@@ -644,13 +644,13 @@ const Fmt LtePhyPdschDemapperConfigFmt_v144[] = {
         {PLACEHOLDER, "PDSCH RNTI Type",               0},    // shift 23 bits,total 4 bits
         {PLACEHOLDER, "Number of Tx Antennas (M)",     0},    // shift 27 bits,total 2 bits
         {PLACEHOLDER, "Number of Rx Antennas (N)",     0},    // shift 29 bits,total 2 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 31 bits,total 1 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 31 bits,total 1 bits
 
         {UINT,        "PDSCH RNTIl ID",                2},    // shift 0 bits,total 16 bits
-        //{UINT,"Reserved",1}, 	// shift 0 bits,total 1 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 1 bits,total 1 bits
+        //{UINT,"Reserved",1}, 	    // shift 0 bits,total 1 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 1 bits,total 1 bits
         {UINT,        "Spatial Rank",                  1},    // shift 2 bits,total 2 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 4 bits,total 1 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 4 bits,total 1 bits
         {PLACEHOLDER, "Frequency Selective PMI",       0},    // shift 5 bits,total 1 bits
         {PLACEHOLDER, "MU Receiver Mode",              0},    // shift 6 bits,total 2 bits
 
@@ -686,10 +686,10 @@ const Fmt LtePhyPdschDemapperConfigFmt_v144[] = {
         {PLACEHOLDER, "Qed Mode",                      0},    // shift 31 bits,total 3 bits
 
         {SKIP,        NULL,                            4},
-        //{UINT,"Reserved",4}, 	// shift 2 bits,total 8 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 10 bits,total 8 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 18 bits,total 8 bits
-        //{PLACEHOLDER,"Reserved",0}, 	// shift 26 bits,total 8 bits
+        //{UINT,"Reserved",4}, 	    // shift 2 bits,total 8 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 10 bits,total 8 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 18 bits,total 8 bits
+        //{PLACEHOLDER,"Reserved",0}, 	    // shift 26 bits,total 8 bits
 };
 
 const ValueName LtePhyPdschDemapperConfig_v23_Modulation[] = {
@@ -728,18 +728,18 @@ const ValueName LtePhyPdschDemapperConfig_Joint_Demod_Skip_Reason[] = {
 // LTE_PHY_Connected_Mode_LTE_Intra_Freq_Meas_Results
 const Fmt LtePhyCmlifmrFmt[] = {
         {UINT, "Version",            1},
-        {SKIP, NULL,                 3},        // Unknown
+        {SKIP, NULL,                 3},    // Unknown
         {UINT, "Serving Cell Index", 1},    // 3 bits
-        {SKIP, NULL,                 3},        // Unknown
+        {SKIP, NULL,                 3},    // Unknown
 };
 
 const Fmt LtePhyCmlifmrFmt_v3_Header[] = {
         {UINT, "E-ARFCN",                  2},
-        {UINT, "Serving Physical Cell ID", 2},  //serving cell ID
+        {UINT, "Serving Physical Cell ID", 2},    //serving cell ID
         {UINT, "Sub-frame Number",         2},
-        {RSRP, "RSRP(dBm)",                2}, //Filtered RSRP (dBm)
+        {RSRP, "RSRP(dBm)",                2},    //Filtered RSRP (dBm)
         {SKIP, NULL,                       2},    // Duplicated
-        {RSRQ, "RSRQ(dB)",                 2}, //Filtered RSRQ (dBm)
+        {RSRQ, "RSRQ(dB)",                 2},    //Filtered RSRQ (dBm)
         {SKIP, NULL,                       2},    // Duplicated
         {UINT, "Number of Neighbor Cells", 1},
         {UINT, "Number of Detected Cells", 1}
@@ -747,13 +747,13 @@ const Fmt LtePhyCmlifmrFmt_v3_Header[] = {
 
 const Fmt LtePhyCmlifmrFmt_v4_Header[] = {
         {UINT, "E-ARFCN",                  4},
-        {UINT, "Serving Physical Cell ID", 2},  //serving cell ID
+        {UINT, "Serving Physical Cell ID", 2},    //serving cell ID
         {UINT, "Sub-frame Number",         2},
-        // {RSRP, "Serving Filtered RSRP(dBm)", 2}, //Filtered RSRP (dBm)
-        {RSRP, "RSRP(dBm)",                2}, //Filtered RSRP (dBm)
+        // {RSRP, "Serving Filtered RSRP(dBm)", 2},    //Filtered RSRP (dBm)
+        {RSRP, "RSRP(dBm)",                2},    //Filtered RSRP (dBm)
         {SKIP, NULL,                       2},    // Duplicated
-        // {RSRQ, "Serving Filtered RSRQ(dB)", 2}, //Filtered RSRQ (dBm)
-        {RSRQ, "RSRQ(dB)",                 2}, //Filtered RSRQ (dBm)
+        // {RSRQ, "Serving Filtered RSRQ(dB)", 2},    //Filtered RSRQ (dBm)
+        {RSRQ, "RSRQ(dB)",                 2},    //Filtered RSRQ (dBm)
         {SKIP, NULL,                       2},    // Duplicated
         {UINT, "Number of Neighbor Cells", 1},
         {UINT, "Number of Detected Cells", 1},
@@ -761,33 +761,33 @@ const Fmt LtePhyCmlifmrFmt_v4_Header[] = {
 };
 
 const Fmt LtePhyCmlifmrFmt_v3_Neighbor_Cell[] = {
-        {UINT, "Physical Cell ID", 2},  //cell ID
+        {UINT, "Physical Cell ID", 2},    //cell ID
         // {RSRP, "Filtered RSRP(dBm)", 2},
         {RSRP, "RSRP(dBm)",        2},
         {SKIP, NULL,               2},    // Duplicated
         // {RSRQ, "Filtered RSRQ(dB)", 2},
         {RSRQ, "RSRQ(dB)",         2},
-        {SKIP, NULL,               4}     // Duplicated & reserved
+        {SKIP, NULL,               4}    // Duplicated & reserved
 };
 
 const Fmt LtePhyCmlifmrFmt_v4_Neighbor_Cell[] = {
-        {UINT, "Physical Cell ID", 2},  //cell ID
+        {UINT, "Physical Cell ID", 2},    //cell ID
         // {RSRP, "Filtered RSRP(dBm)", 2},
         {RSRP, "RSRP(dBm)",        2},
         {SKIP, NULL,               2},    // Duplicated
         // {RSRQ, "Filtered RSRQ(dB)", 2},
         {RSRQ, "RSRQ(dB)",         2},
-        {SKIP, NULL,               4}     // Duplicated & reserved
+        {SKIP, NULL,               4}    // Duplicated & reserved
 };
 
 const Fmt LtePhyCmlifmrFmt_v3_Detected_Cell[] = {
-        {UINT, "Physical Cell ID", 4},  //cell ID
+        {UINT, "Physical Cell ID", 4},    //cell ID
         {UINT, "SSS Corr Value",   4},
         {UINT, "Reference Time",   8}
 };
 
 const Fmt LtePhyCmlifmrFmt_v4_Detected_Cell[] = {
-        {UINT, "Physical Cell ID", 2},  //cell ID
+        {UINT, "Physical Cell ID", 2},    //cell ID
         {SKIP, NULL,               2},
         {UINT, "SSS Corr Value",   4},
         {UINT, "Reference Time",   8}
@@ -797,7 +797,7 @@ const Fmt LtePhyCmlifmrFmt_v4_Detected_Cell[] = {
 const Fmt LtePhySubpktFmt[] = {
         {UINT, "Version",              1},
         {UINT, "Number of SubPackets", 1},
-        {SKIP, NULL,                   2}     // Unknown
+        {SKIP, NULL,                   2}    // Unknown
 };
 
 const Fmt LtePhySubpktFmt_v1_SubpktHeader[] = {
@@ -818,72 +818,72 @@ const ValueName Valid_Rx_Data[] = {
 // Serving_Cell_Measurement_Result
 const Fmt LtePhySubpktFmt_v1_Scmr_v4[] = {
         {UINT,        "E-ARFCN",                 2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Is Restricted, Cell Timing [0]
         {UINT,        "RSRP Rx[0]",              4},    // skip 10 bits, then 12 bits. (0.0625 * x - 180) dBm
         {UINT,        "RSRP Rx[1]",              4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
-        {UINT,        "RSRP",                    4},          // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
+        {UINT,        "RSRP",                    4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
         {UINT,        "RSRQ Rx[0]",              4},    // skip 12 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSRQ Rx[1]",              4},    // 10 bits, (0.0625 * x) - 30 dB
-        {PLACEHOLDER, "RSRQ",                    0},   // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
+        {PLACEHOLDER, "RSRQ",                    0},    // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {UINT,        "RSSI",                    4},    // 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      12},
 };
 
 const Fmt LtePhySubpktFmt_v1_Scmr_v7[] = {
         {UINT,        "E-ARFCN",                 4},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Is Restricted, Cell Timing [0]
         {UINT,        "RSRP Rx[0]",              4},    // skip 10 bits, then 12 bits. (0.0625 * x - 180) dBm
         {UINT,        "RSRP Rx[1]",              4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
-        {UINT,        "RSRP",                    4},          // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
+        {UINT,        "RSRP",                    4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
         {UINT,        "RSRQ Rx[0]",              4},    // skip 12 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSRQ Rx[1]",              4},    // 10 bits, (0.0625 * x) - 30 dB
-        {PLACEHOLDER, "RSRQ",                    0},   // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
+        {PLACEHOLDER, "RSRQ",                    0},    // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {UINT,        "RSSI",                    4},    // 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      12},
 };
 
 const Fmt LtePhySubpktFmt_v1_Scmr_v18[] = {
         {UINT,        "E-ARFCN",                 4},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         // {SKIP, NULL, 2},
         {SKIP,        NULL,                      11},    // Is Restricted, Cell Timing [0]
         {UINT,        "RSRP Rx[0]",              4},    // skip 10 bits, then 12 bits. (0.0625 * x - 180) dBm
         {UINT,        "RSRP Rx[1]",              4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
-        {UINT,        "RSRP",                    4},          // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
+        {UINT,        "RSRP",                    4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
         {UINT,        "RSRQ Rx[0]",              4},    // skip 12 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSRQ Rx[1]",              4},    // 10 bits, (0.0625 * x) - 30 dB
-        {PLACEHOLDER, "RSRQ",                    0},   // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
+        {PLACEHOLDER, "RSRQ",                    0},    // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {PLACEHOLDER, "RSSI",                    0},    // 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      23},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      20},
 };
 
@@ -891,11 +891,11 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v19[] = {
         {UINT,        "E-ARFCN",                 4},
         {UINT,        "Num-of-cells",            2},
         {SKIP,        NULL,                      2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",         0},    // 1 bit
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Is Restricted, Cell Timing [0]
@@ -905,28 +905,28 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v19[] = {
         {UINT,        "RSRP",                    4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
         {UINT,        "RSRQ Rx[0]",              4},    // skip 12 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSRQ Rx[1]",              4},    // 10 bits, (0.0625 * x) - 30 dB
-        {PLACEHOLDER, "RSRQ",                    0},   // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
+        {PLACEHOLDER, "RSRQ",                    0},    // skip 20 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {UINT,        "RSSI",                    4},    // 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      12},
-        {UINT,        "Projected SIR",           4}, // Projected Sir, if x & 1<<31: x -= 4294967296
+        {UINT,        "Projected SIR",           4},    // Projected Sir, if x & 1<<31: x -= 4294967296
         // x /= 16
-        {UINT,        "Post IC RSRQ",            4},  // (0.0625 * x - 30) dB
+        {UINT,        "Post IC RSRQ",            4},    // (0.0625 * x - 30) dB
 };
 
 const Fmt LtePhySubpktFmt_v1_Scmr_v22[] = {
         {UINT,        "E-ARFCN",                 4},
         {UINT,        "Num-of-cells",            2},
         {SKIP,        NULL,                      2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",         0},    // 1 bit
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Cell Timing [0]
@@ -939,16 +939,16 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v22[] = {
         {UINT,        "RSRQ Rx[1]",              4},    // 10 bits, (0.0625 * x) - 30 dB
         {UINT,        "RSRQ",                    4},    // skip 10 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      4},
         {UINT,        "RSSI",                    4},    // then 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      16},
-        {UINT,        "Projected SIR",           4}, // Projected Sir, if x & 1<<31: x -= 4294967296
+        {UINT,        "Projected SIR",           4},    // Projected Sir, if x & 1<<31: x -= 4294967296
         // x /= 16
-        {UINT,        "Post IC RSRQ",            4},  // (0.0625 * x - 30) dB
+        {UINT,        "Post IC RSRQ",            4},    // (0.0625 * x - 30) dB
         {UINT,        "CINR Rx[0]",              4},
         {UINT,        "CINR Rx[1]",              4},
 };
@@ -957,11 +957,11 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v24[] = {
         {UINT,        "E-ARFCN",                 4},
         {UINT,        "Num-of-cells",            2},
         {SKIP,        NULL,                      2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",         0},    // 1 bit
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Cell Timing [0]
@@ -975,27 +975,27 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v24[] = {
         {UINT,        "RSRQ Rx[1]",              2},    // 10 bits (0.0625 * x) - 30 dB
         {UINT,        "RSRQ",                    2},    // skip 4 bits, then 10 bits, (0.0625 * x - 30) dB
         {UINT,        "RSSI Rx[0]",              4},    // skip 10 bits, them 11 bits (0.0625 * x - 110) dBm
-        {PLACEHOLDER, "RSSI Rx[1]",              0}, // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
+        {PLACEHOLDER, "RSSI Rx[1]",              0},    // skip 21 bits, then 11 bits (0.0625 * x - 110) dBm
         {UINT,        "RSSI",                    4},    // 11 bits, (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      16},
         {SKIP,        NULL,                      8},
-        //{UINT, "Projected SIR", 4}, // Projected Sir, if x & 1<<31: x -= 4294967296
+        //{UINT, "Projected SIR", 4},    // Projected Sir, if x & 1<<31: x -= 4294967296
         // x /= 16
-        //{UINT, "Post IC RSRQ", 4},  // (0.0625 * x - 30) dB
+        //{UINT, "Post IC RSRQ", 4},    // (0.0625 * x - 30) dB
 };
 
 const Fmt LtePhySubpktFmt_v1_Scmr_v35[] = {
         {UINT,        "E-ARFCN",                 4},
         {UINT,        "Num-of-cells",            2},
         {SKIP,        NULL,                      2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",         0},    // 1 bit
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Cell Timing [0]
@@ -1018,14 +1018,14 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v35[] = {
         {PLACEHOLDER, "RSSI Rx[3]",              0},    // skip 11 bits, then 11 bits (0.0625 * x - 110) dBm
         {UINT,        "RSSI",                    4},    // 11 bits (0.0625 * x - 110) dBm
         {SKIP,        NULL,                      20},
-        {UINT,        "FTL SNR Rx[0]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
-        {UINT,        "FTL SNR Rx[2]",           4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[3]",           0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[2]",           4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[3]",           0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                      12},
-        {UINT,        "Projected SIR",           4}, // Projected Sir, if x & 1<<31: x -= 4294967296
+        {UINT,        "Projected SIR",           4},    // Projected Sir, if x & 1<<31: x -= 4294967296
         // x /= 16
-        {UINT,        "Post IC RSRQ",            4},  // (0.0625 * x - 30) dB
+        {UINT,        "Post IC RSRQ",            4},    // (0.0625 * x - 30) dB
         {UINT,        "CINR Rx[0]",              4},
         {UINT,        "CINR Rx[1]",              4},
         {UINT,        "CINR Rx[2]",              4},
@@ -1036,11 +1036,11 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v36[] = {
         {UINT,        "E-ARFCN",                 4},
         {UINT,        "Num-of-cells",            2},
         {SKIP,        NULL,                      2},
-        {UINT,        "Physical Cell ID",        2},  // 9 bits
+        {UINT,        "Physical Cell ID",        2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",      0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",         0},    // 1 bit
         {SKIP,        NULL,                      2},
-        {UINT,        "Current SFN",             2},   // 10 bits
+        {UINT,        "Current SFN",             2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number", 0},    // 4 bits
         {SKIP,        NULL,                      2},
         {SKIP,        NULL,                      4},    // Cell Timing [0]
@@ -1061,11 +1061,11 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v40[] = {
         {UINT,        "E-ARFCN",                  4},
         {UINT,        "Num-of-cells",             2},
         {UINT,        "Valid Rx",                 2},
-        {UINT,        "Physical Cell ID",         2},  // 9 bits
+        {UINT,        "Physical Cell ID",         2},    // 9 bits
         {PLACEHOLDER, "Serving Cell Index",       0},    // 3 bits
         {PLACEHOLDER, "Is Serving Cell",          0},    // 1 bit
         {SKIP,        NULL,                       2},
-        {UINT,        "Current SFN",              2},   // 10 bits
+        {UINT,        "Current SFN",              2},    // 10 bits
         {PLACEHOLDER, "Current Subframe Number",  0},    // 4 bits
         {SKIP,        NULL,                       2},
         {SKIP,        NULL,                       4},    // Cell Timing [0]
@@ -1073,7 +1073,7 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v40[] = {
         {UINT,        "RSRP Rx[0]",               4},    // skip 10 bits, then 12 bits. (0.0625 * x - 180) dBm
         {UINT,        "RSRP Rx[1]",               4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
         {UINT,        "RSRP Rx[2]",               4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
-        {SKIP,        NULL,                       4},// skip Pathloss rsrp Rx[2],Pathloss rsrp Rx[3]
+        {SKIP,        NULL,                       4},    // skip Pathloss rsrp Rx[2],Pathloss rsrp Rx[3]
         {UINT,        "RSRP Rx[3]",               4},    // 12 bits (0.0625 * x - 180) dBm
         {PLACEHOLDER, "RSRP",                     0},    // skip 12 bits, then 12 bits, (0.0625 * (x + 640) - 180) dB
         {UINT,        "Filtered RSRP",            4},    // skip 12 bits, then 12 bits (0.0625 * x - 180) dBm
@@ -1091,15 +1091,15 @@ const Fmt LtePhySubpktFmt_v1_Scmr_v40[] = {
         {SKIP,        NULL,                       10},
         {UINT,        "Residual Frequency Error", 2},
         {SKIP,        NULL,                       8},
-        {UINT,        "FTL SNR Rx[0]",            4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[1]",            0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
-        {UINT,        "FTL SNR Rx[2]",            4}, // 9 bits
-        {PLACEHOLDER, "FTL SNR Rx[3]",            0},  // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[0]",            4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[1]",            0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
+        {UINT,        "FTL SNR Rx[2]",            4},    // 9 bits
+        {PLACEHOLDER, "FTL SNR Rx[3]",            0},    // skip 9 bits, then 9 bits (0.1 * x - 20) dB
         {SKIP,        NULL,                       12},
         {SKIP,        NULL,                       4},
-        {UINT,        "Projected SIR",            4}, // Projected Sir, if x & 1<<31: x -= 4294967296
+        {UINT,        "Projected SIR",            4},    // Projected Sir, if x & 1<<31: x -= 4294967296
         // x /= 16
-        {UINT,        "Post IC RSRQ",             4},  // (0.0625 * x - 30) dB
+        {UINT,        "Post IC RSRQ",             4},    // (0.0625 * x - 30) dB
         {UINT,        "CINR Rx[0]",               4},
         {UINT,        "CINR Rx[1]",               4},
         {UINT,        "CINR Rx[2]",               4},
@@ -1178,33 +1178,33 @@ const Fmt LteRrcServCellInfoLogPacketFmt[] = {
 };
 
 const Fmt LteRrcServCellInfoLogPacketFmt_v2[] = {
-        {UINT,      "Cell ID",            2},  //Physical cell ID
-        {UINT,      "Downlink frequency", 2},   //Downlink frequency
-        {UINT,      "Uplink frequency",   2},   //Uplink frequency
+        {UINT,      "Cell ID",            2},    //Physical cell ID
+        {UINT,      "Downlink frequency", 2},    //Downlink frequency
+        {UINT,      "Uplink frequency",   2},    //Uplink frequency
         {BANDWIDTH, "Downlink bandwidth", 1},    //Downlink bandwidth
         {BANDWIDTH, "Uplink bandwidth",   1},    //Uplink bandwidth
-        {UINT,      "Cell Identity",      4}, //cell ID
-        {UINT,      "TAC",                2},   //Tracking area code
+        {UINT,      "Cell Identity",      4},    //cell ID
+        {UINT,      "TAC",                2},    //Tracking area code
         {UINT,      "Band Indicator",     4},    //Band indicator
-        {UINT,      "MCC",                2},   //MCC
-        {UINT,      "MNC Digit",          1}, //MNC digit
-        {UINT,      "MNC",                2},   //MNC
-        {UINT,      "Allowed Access",     1} //Allowed access
+        {UINT,      "MCC",                2},    //MCC
+        {UINT,      "MNC Digit",          1},    //MNC digit
+        {UINT,      "MNC",                2},    //MNC
+        {UINT,      "Allowed Access",     1}    //Allowed access
 };
 
 const Fmt LteRrcServCellInfoLogPacketFmt_v3[] = {
-        {UINT,      "Cell ID",            2},  //Physical cell ID
-        {UINT,      "Downlink frequency", 4},   //Downlink frequency
-        {UINT,      "Uplink frequency",   4},   //Uplink frequency
+        {UINT,      "Cell ID",            2},    //Physical cell ID
+        {UINT,      "Downlink frequency", 4},    //Downlink frequency
+        {UINT,      "Uplink frequency",   4},    //Uplink frequency
         {BANDWIDTH, "Downlink bandwidth", 1},    //Downlink bandwidth
         {BANDWIDTH, "Uplink bandwidth",   1},    //Uplink bandwidth
-        {UINT,      "Cell Identity",      4}, //cell ID
-        {UINT,      "TAC",                2},   //Tracking area code
+        {UINT,      "Cell Identity",      4},    //cell ID
+        {UINT,      "TAC",                2},    //Tracking area code
         {UINT,      "Band Indicator",     4},    //Band indicator
-        {UINT,      "MCC",                2},   //MCC
-        {UINT,      "MNC Digit",          1}, //MNC digit
-        {UINT,      "MNC",                2},   //MNC
-        {UINT,      "Allowed Access",     1} //Allowed access
+        {UINT,      "MCC",                2},    //MCC
+        {UINT,      "MNC Digit",          1},    //MNC digit
+        {UINT,      "MNC",                2},    //MNC
+        {UINT,      "Allowed Access",     1}    //Allowed access
 };
 
 // TODO: interpret the value of "Allowed Access"
@@ -1215,27 +1215,27 @@ const Fmt LteRrcMibMessageLogPacketFmt[] = {
 };
 
 const Fmt LteRrcMibMessageLogPacketFmt_v1[] = {
-        {UINT,      "Physical Cell ID",  2},  //cell ID
-        {UINT,      "Freq",              2},  //frequency
+        {UINT,      "Physical Cell ID",  2},    //cell ID
+        {UINT,      "Freq",              2},    //frequency
         {UINT,      "SFN",               2},
         {UINT,      "Number of Antenna", 1},
-        {BANDWIDTH, "DL BW",             1}     //downlink bandwidth
+        {BANDWIDTH, "DL BW",             1}    //downlink bandwidth
 };
 
 const Fmt LteRrcMibMessageLogPacketFmt_v2[] = {
-        {UINT,      "Physical Cell ID",  2},  //cell ID
-        {UINT,      "Freq",              4},  //frequency
+        {UINT,      "Physical Cell ID",  2},    //cell ID
+        {UINT,      "Freq",              4},    //frequency
         {UINT,      "SFN",               2},
         {UINT,      "Number of Antenna", 1},
-        {BANDWIDTH, "DL BW",             1}     //downlink bandwidth
+        {BANDWIDTH, "DL BW",             1}    //downlink bandwidth
 };
 
 const Fmt LteRrcMibMessageLogPacketFmt_v3[] = {
-        {UINT,      "Physical Cell ID",  2},  //cell ID
-        {UINT,      "Freq",              4},  //frequency
+        {UINT,      "Physical Cell ID",  2},    //cell ID
+        {UINT,      "Freq",              4},    //frequency
         {UINT,      "SFN",               2},
         {UINT,      "Number of Antenna", 1},
-        {BANDWIDTH, "DL BW",             1},     //downlink bandwidth
+        {BANDWIDTH, "DL BW",             1},    //downlink bandwidth
         //added fields
         {UINT,      "Sib1 BR Sch Info",  1}
 };
@@ -1246,7 +1246,7 @@ const Fmt LtePdcpDlSrbIntegrityDataPduFmt[] = {
         {UINT, "Version",    1},
         {UINT, "Num SubPkt", 1},
         {SKIP, NULL,         44},
-        {UINT, "PDU Size",   2}, // 47-48
+        {UINT, "PDU Size",   2},    // 47-48
         {SKIP, NULL,         16}
 };
 
@@ -1256,7 +1256,7 @@ const Fmt LtePdcpUlSrbIntegrityDataPduFmt[] = {
         {UINT, "Version",    1},
         {UINT, "Num SubPkt", 1},
         {SKIP, NULL,         44},
-        {UINT, "PDU Size",   2}, // 47-48
+        {UINT, "PDU Size",   2},    // 47-48
         {SKIP, NULL,         12}
 };
 
@@ -1307,7 +1307,7 @@ const ValueName LteMacConfigurationConfigType_ConfigReason[] = {
 };
 
 const Fmt LteMacConfigurationSubpkt_DLConfig[] = {
-        {UINT, "TA Timer", 2}, // 0xFF need to be read as infinity
+        {UINT, "TA Timer", 2},    // 0xFF need to be read as infinity
         {SKIP, "NULL",     2}
 };
 
@@ -1332,7 +1332,7 @@ const Fmt LteMacConfigurationSubpkt_ULConfig[] = {
         {UINT, "SR periodicity",            3},
         {UINT, "BSR timer",                 2},
         {UINT, "SPS Number of Tx released", 2},
-        {UINT, "Retx BSR timer",            2}, // 0xFF need to be read as infinity
+        {UINT, "Retx BSR timer",            2},    // 0xFF need to be read as infinity
         {SKIP, "NULL",                      3}
 };
 
@@ -1342,7 +1342,7 @@ const Fmt LteMacConfigurationSubpkt_ULConfig_v2[] = {
         {UINT, "SR periodicity",            2},
         {UINT, "BSR timer",                 2},
         {UINT, "SPS Number of Tx released", 2},
-        {UINT, "Retx BSR timer",            2}, // 0xFF need to be read as infinity
+        {UINT, "Retx BSR timer",            2},    // 0xFF need to be read as infinity
         {SKIP, "NULL",                      2},
 };
 
@@ -1410,7 +1410,7 @@ const Fmt LteMacConfigurationSubpkt_LCConfig[] = {
         {UINT, "Number of deleted LC",        1},
         {SKIP, "NULL",                        32},
         {UINT, "Number of added/modified LC", 1}
-//    {SKIP, "NULL", 290}
+        //    {SKIP, "NULL", 290}
 };
 
 const Fmt LteMacConfigurationSubpkt_LCConfig_v2[] = {
@@ -1418,7 +1418,7 @@ const Fmt LteMacConfigurationSubpkt_LCConfig_v2[] = {
         {UINT, "Number of deleted LC",        1},
         {SKIP, "NULL",                        32},
         {UINT, "Number of added/modified LC", 1}
-//    {SKIP, "NULL", 290}
+        //    {SKIP, "NULL", 290}
 };
 
 const Fmt LteMacConfiguration_LCConfig_LC[] = {
@@ -1430,13 +1430,13 @@ const Fmt LteMacConfiguration_LCConfig_LC[] = {
 };
 
 const Fmt LteMacConfigurationSubpkt_eMBMSConfig[] = {
-        {UINT, "Num eMBMS Active LCs", 2}, // Not sure if this offset and length of this field is correct
+        {UINT, "Num eMBMS Active LCs", 2},    // Not sure if this offset and length of this field is correct
         {SKIP, "NULL",                 98}
 };
 
 const Fmt LteMacConfigurationSubpkt_eMBMSConfig_v2[] = {
         {UINT, "Sub Id",               1},
-        {UINT, "Num eMBMS Active LCs", 2}, // Not sure if this offset and length of this field is correct
+        {UINT, "Num eMBMS Active LCs", 2},    // Not sure if this offset and length of this field is correct
         {SKIP, "NULL",                 98}
 };
 
@@ -1455,7 +1455,7 @@ const Fmt LteMacConfigurationSubpkt_All_Rach_Config[] = {
 
 const Fmt LteMacConfigurationSubpkt_All_Rach_Config_Cell_Info[] = {
         {UINT,       "Scell Id",                         1},
-        {WCDMA_MEAS, "Preamble initial power (dB)",      2}, // Note sure if it is correct
+        {WCDMA_MEAS, "Preamble initial power (dB)",      2},    // Note sure if it is correct
         {UINT,       "Power ramping step (dB)",          1},
         {UINT,       "RA index1",                        1},
         {UINT,       "RA index2",                        1},
@@ -1682,7 +1682,7 @@ const Fmt LteMacULBufferStatusInternal_ULBufferStatusSubPacket_LCIDFmt_v24[] = {
 const Fmt LteRlcUlConfigLogPacketFmt[] = {
         {UINT, "Version",    1},
         {UINT, "Num SubPkt", 1},
-        {SKIP, NULL,         2}, // reserved
+        {SKIP, NULL,         2},    // reserved
 };
 
 const Fmt LteRlcUlConfigLogPacket_SubpktHeader[] = {
@@ -1791,7 +1791,7 @@ const Fmt LteRlcUlConfigLogPacket_Subpkt_ActiveRB_Fmt_v3[] = {
 const Fmt LteRlcDlConfigLogPacketFmt[] = {
         {UINT, "Version",    1},
         {UINT, "Num SubPkt", 1},
-        {SKIP, NULL,         2}, // reserved
+        {SKIP, NULL,         2},    // reserved
 };
 
 const Fmt LteRlcDlConfigLogPacket_SubpktHeader[] = {
@@ -1909,7 +1909,7 @@ const Fmt LteRlcUlAmAllPdu_SubpktPayload[] = {
         {UINT, "RB Mode",                 1},
         {UINT, "SN Length",               1},
         {SKIP, NULL,                      1},
-        {UINT, "Enabled PDU Log Packets", 2}, // need to check bit by bit
+        {UINT, "Enabled PDU Log Packets", 2},    // need to check bit by bit
         // this part is different from DL
         {UINT, "VT(A)",                   2},
         {UINT, "VT(S)",                   2},
@@ -1952,13 +1952,13 @@ const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_DATA[] = {
         {PLACEHOLDER, "E",  0},
 };
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LI_ALLIGN[] = {
-        {UINT, "LI", 2}, // 0x 0011 1100
+        {UINT, "LI", 2},    // 0x 0011 1100
 };
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LI_PADDING[] = {
-        {UINT, "LI", 1}, //
+        {UINT, "LI", 1},    //
 };
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LSF_SO[] = {
-        {UINT, "LSF", 1},   // & 128
+        {UINT, "LSF", 1},    // & 128
         {UINT, "SO",  1},    // the rest 7 bits of LSF (& 127) * 256 + this value
 };
 
@@ -1967,7 +1967,7 @@ const Fmt LteRlcUlAmAllPdu_SubpktPayload_v4[] = {
         {UINT, "RB Mode",                 1},
         {UINT, "SN Length",               1},
         {SKIP, NULL,                      1},
-        {UINT, "Enabled PDU Log Packets", 2}, // need to check bit by bit
+        {UINT, "Enabled PDU Log Packets", 2},    // need to check bit by bit
         // this part is different from DL
         {UINT, "VT(A)",                   2},
         {UINT, "VT(S)",                   2},
@@ -2012,15 +2012,15 @@ const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_DATA_v4[] = {
 };
 
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LI_ALLIGN_v4[] = {
-        {UINT, "LI", 2}, // 0x 0011 1100
+        {UINT, "LI", 2},    // 0x 0011 1100
 };
 
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LI_PADDING_v4[] = {
-        {UINT, "LI", 1}, //
+        {UINT, "LI", 1},    //
 };
 
 const Fmt LteRlcUlAmAllPdu_Subpkt_PDU_LSF_SO_v4[] = {
-        {UINT, "LSF", 1},   // & 128
+        {UINT, "LSF", 1},    // & 128
         {UINT, "SO",  1},    // the rest 7 bits of LSF (& 127) * 256 + this value
 };
 
@@ -2044,7 +2044,7 @@ const Fmt LteRlcDlAmAllPdu_SubpktPayload[] = {
         {UINT, "RB Mode",                 1},
         {UINT, "SN Length",               1},
         {SKIP, NULL,                      1},
-        {UINT, "Enabled PDU Log Packets", 2}, // need to check bit by bit
+        {UINT, "Enabled PDU Log Packets", 2},    // need to check bit by bit
         // this part is different from DL
         {UINT, "VR(R)",                   2},
         {UINT, "VR(X)",                   2},
@@ -2087,13 +2087,13 @@ const Fmt LteRlcDlAmAllPdu_Subpkt_PDU_DATA[] = {
         {PLACEHOLDER, "E",  0},
 };
 const Fmt LteRlcDlAmAllPdu_Subpkt_PDU_LI_ALLIGN[] = {
-        {UINT, "LI", 2}, // 0x 0011 1100
+        {UINT, "LI", 2},    // 0x 0011 1100
 };
 const Fmt LteRlcDlAmAllPdu_Subpkt_PDU_LI_PADDING[] = {
-        {UINT, "LI", 1}, //
+        {UINT, "LI", 1},    //
 };
 const Fmt LteRlcDlAmAllPdu_Subpkt_PDU_LSF_SO[] = {
-        {UINT, "LSF", 1},   // & 128
+        {UINT, "LSF", 1},    // & 128
         {UINT, "SO",  1},    // the rest 7 bits of LSF (& 127) * 256 + this value
 };
 
@@ -2113,7 +2113,7 @@ const Fmt LteMacRachTrigger_SubpktHeader[] = {
 
 const Fmt LteMacRachTrigger_RachConfigSubpktPayload[] = {
         // Version 2
-        {WCDMA_MEAS,  "Preamble initial power (dB)",      1}, // Note sure if it is correct
+        {WCDMA_MEAS,  "Preamble initial power (dB)",      1},    // Note sure if it is correct
         {SKIP,        NULL,                               1},
         {UINT,        "Power ramping step (dB)",          1},
         {UINT,        "RA index1",                        1},
@@ -2142,7 +2142,7 @@ const Fmt LteMacRachTrigger_RachConfigSubpktPayload_v4[] = {
 
 const Fmt LteMacRachTrigger_RachConfigSubpktPayload_v4_cell[] = {
         {UINT,        "Cell Id",                          1},
-        {WCDMA_MEAS,  "Preamble initial power (dB)",      1}, // Note sure if it is correct
+        {WCDMA_MEAS,  "Preamble initial power (dB)",      1},    // Note sure if it is correct
         {SKIP,        NULL,                               1},
         {UINT,        "Power ramping step (dB)",          1},
         {UINT,        "RA index1",                        1},
@@ -2164,7 +2164,7 @@ const Fmt LteMacRachTrigger_RachConfigSubpktPayload_v4_cell[] = {
 };
 
 const Fmt LteMacRachTrigger_RachConfigSubpktPayload_v5[] = {
-        {WCDMA_MEAS,  "Preamble initial power (dB)",      2}, // Note sure if it is correct
+        {WCDMA_MEAS,  "Preamble initial power (dB)",      2},    // Note sure if it is correct
         {UINT,        "Power ramping step (dB)",          1},
         {UINT,        "RA index1",                        1},
         {UINT,        "RA index2",                        1},
@@ -2251,7 +2251,7 @@ const ValueName LteMacRachTrigger_RachReasonSubpkt_RachReason[] = {
 };
 
 const ValueName ValueNameRachContention[] = {
-        {0, "NonContention Based RACH procedure"},  // not confirmed
+        {0, "NonContention Based RACH procedure"},    // not confirmed
         {1, "Contention Based RACH procedure"},
 };
 
@@ -3367,7 +3367,7 @@ const Fmt LtePucchPowerControl_Record_Fmt_v4[] = {
 };
 const ValueName LtePucchPowerControl_Record_v4_DCI_Format[] = {
         // Release 8
-        // http://www.sharetechnote.com/html/LTE_Advanced_DCI.html
+        // http:    //www.sharetechnote.com/html/LTE_Advanced_DCI.html
         {0,  "Format 0"},
         {1,  "Format 1"},
         {2,  "Format 1A"},
@@ -3392,7 +3392,7 @@ const ValueName LtePucchPowerControl_Record_v4_PUCCH_Format[] = {
         {3, "Format 2"},
         {4, "Format 2A"},
         {5, "Format 2B"},
-//    {6, "Format 3"},
+        //    {6, "Format 3"},
         {6, "Format 1bCS"},
         {7, "Format 3"},
 };
@@ -3431,7 +3431,7 @@ const Fmt LtePucchPowerControl_Record_Fmt_v24[] = {
 
 const ValueName LtePucchPowerControl_Record_v24_DCI_Format[] = {
         // Release 8
-        // http://www.sharetechnote.com/html/LTE_Advanced_DCI.html
+        // http:    //www.sharetechnote.com/html/LTE_Advanced_DCI.html
         {0,  "Format 0"},
         {1,  "Format 1"},
         {2,  "Format 1A"},
@@ -3454,7 +3454,7 @@ const ValueName LtePucchPowerControl_Record_v24_PUCCH_Format[] = {
         {4, "Format 2A"},
         {5, "Format 2B"},
 
-        {6, "Format 1bcs"},//diff from v2
+        {6, "Format 1bcs"},    //diff from v2
 };
 const ValueName LtePucchPowerControl_Record_v24_TPC[] = {
         {31, "Not present"},
@@ -3531,7 +3531,7 @@ const ValueName LtePuschPowerControl_Record_v5_TxType[] = {
 };
 const ValueName LtePuschPowerControl_Record_v5_DCI_Format[] = {
         // Release 8
-        // http://www.sharetechnote.com/html/LTE_Advanced_DCI.html
+        // http:    //www.sharetechnote.com/html/LTE_Advanced_DCI.html
         {0,  "Format 0"},
         {1,  "Format 1"},
         {2,  "Format 1A"},
@@ -3586,36 +3586,36 @@ const Fmt LtePdcchPhichIndicationReport_Record_v5_p1[] = {
 };
 
 const Fmt LtePdcchPhichIndicationReport_Record_v25_p1[] = {
-        {UINT,        "Num PDCCH Results",   4},             // 3 bits
-        {PLACEHOLDER, "Num PHICH Results",   0},      // 3 bits
-        {PLACEHOLDER, "PDCCH Timing SFN",    0},       // 10 bits
+        {UINT,        "Num PDCCH Results",   4},    // 3 bits
+        {PLACEHOLDER, "Num PHICH Results",   0},    // 3 bits
+        {PLACEHOLDER, "PDCCH Timing SFN",    0},    // 10 bits
         {PLACEHOLDER, "PDCCH Timing Sub-FN", 0},    // 4 bits
 };
 
 const Fmt LtePdcchPhichIndicationReport_Record_v33_p1[] = {
-        {UINT,        "Num PDCCH Results",   4},             // 3 bits
-        {PLACEHOLDER, "Num PHICH Results",   0},      // 3 bits
-        {PLACEHOLDER, "PDCCH Timing SFN",    0},       // 10 bits
+        {UINT,        "Num PDCCH Results",   4},    // 3 bits
+        {PLACEHOLDER, "Num PHICH Results",   0},    // 3 bits
+        {PLACEHOLDER, "PDCCH Timing SFN",    0},    // 10 bits
         {PLACEHOLDER, "PDCCH Timing Sub-FN", 0},    // 4 bits
         {SKIP,        NULL,                  8},
 };
 
 // totally 12 bytes for all phich
 const Fmt LtePdcchPhichIndicationReport_Record_v25_phich[] = {
-        {UINT,        "Cell Index",       4},                    // 3 bits
-        {PLACEHOLDER, "PHICH Included",   0},         // 1 bit
-        {PLACEHOLDER, "PHICH 1 Included", 0},       // 1 bit
-        {PLACEHOLDER, "PHICH Value",      0},            // 1 bit
-        {PLACEHOLDER, "PHICH 1 Value",    0},          // 1 bit
+        {UINT,        "Cell Index",       4},    // 3 bits
+        {PLACEHOLDER, "PHICH Included",   0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Included", 0},    // 1 bit
+        {PLACEHOLDER, "PHICH Value",      0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Value",    0},    // 1 bit
 };
 
 // totally 20 bytes for all phich
 const Fmt LtePdcchPhichIndicationReport_Record_v33_phich[] = {
-        {UINT,        "Cell Index",       4},                    // 3 bits
-        {PLACEHOLDER, "PHICH Included",   0},         // 1 bit
-        {PLACEHOLDER, "PHICH 1 Included", 0},       // 1 bit
-        {PLACEHOLDER, "PHICH Value",      0},            // 1 bit
-        {PLACEHOLDER, "PHICH 1 Value",    0},          // 1 bit
+        {UINT,        "Cell Index",       4},    // 3 bits
+        {PLACEHOLDER, "PHICH Included",   0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Included", 0},    // 1 bit
+        {PLACEHOLDER, "PHICH Value",      0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Value",    0},    // 1 bit
 };
 
 // totally number of pdcch info + number of pdcch hidden info = 8
@@ -3634,28 +3634,28 @@ const Fmt LtePdcchPhichIndicationReport_Record_v5_p2[] = {
 // totally 64 bytes for all pdcch
 const Fmt LtePdcchPhichIndicationReport_Record_v25_pdcch[] = {
         // PDCCH Info
-        {UINT,        "Serv Cell Idx",     2},                 // 3 bits
-        {PLACEHOLDER, "RNTI Type",         0},              // 4 bits
-        {PLACEHOLDER, "Payload Size",      0},           // 7 bits
-        {PLACEHOLDER, "Aggregation Level", 0},      // 2 bits
-        {UINT,        "Search Space",      2},                  // 1 bit
-        {PLACEHOLDER, "SPS Grant Type",    0},         // 3 bits
-        {PLACEHOLDER, "New DL Tx",         0},              // 1 bit
-        {PLACEHOLDER, "Num DL Trblks",     0},          // 2 bits
+        {UINT,        "Serv Cell Idx",     2},    // 3 bits
+        {PLACEHOLDER, "RNTI Type",         0},    // 4 bits
+        {PLACEHOLDER, "Payload Size",      0},    // 7 bits
+        {PLACEHOLDER, "Aggregation Level", 0},    // 2 bits
+        {UINT,        "Search Space",      2},    // 1 bit
+        {PLACEHOLDER, "SPS Grant Type",    0},    // 3 bits
+        {PLACEHOLDER, "New DL Tx",         0},    // 1 bit
+        {PLACEHOLDER, "Num DL Trblks",     0},    // 2 bits
         {SKIP,        NULL,                4},
 };
 
 // totally 64 bytes for all pdcch
 const Fmt LtePdcchPhichIndicationReport_Record_v33_pdcch[] = {
         // PDCCH Info
-        {UINT,        "Serv Cell Idx",     2},                 // 3 bits
-        {PLACEHOLDER, "RNTI Type",         0},              // 4 bits
-        {PLACEHOLDER, "Payload Size",      0},           // 7 bits
-        {PLACEHOLDER, "Aggregation Level", 0},      // 2 bits
-        {UINT,        "Search Space",      2},                  // 1 bit
-        {PLACEHOLDER, "SPS Grant Type",    0},         // 3 bits
-        {PLACEHOLDER, "New DL Tx",         0},              // 1 bit
-        {PLACEHOLDER, "Num DL Trblks",     0},          // 2 bits
+        {UINT,        "Serv Cell Idx",     2},    // 3 bits
+        {PLACEHOLDER, "RNTI Type",         0},    // 4 bits
+        {PLACEHOLDER, "Payload Size",      0},    // 7 bits
+        {PLACEHOLDER, "Aggregation Level", 0},    // 2 bits
+        {UINT,        "Search Space",      2},    // 1 bit
+        {PLACEHOLDER, "SPS Grant Type",    0},    // 3 bits
+        {PLACEHOLDER, "New DL Tx",         0},    // 1 bit
+        {PLACEHOLDER, "Num DL Trblks",     0},    // 2 bits
         {SKIP,        NULL,                4},
 };
 
@@ -3666,30 +3666,30 @@ const Fmt LtePdcchPhichIndicationReport_Fmt_v42[] = {
 };
 
 const Fmt LtePdcchPhichIndicationReport_Record_v42_p1[] = {
-        {UINT,        "Num PDCCH Results",   4},             // 3 bits
-        {PLACEHOLDER, "Num PHICH Results",   0},      // 3 bits
-        {PLACEHOLDER, "PDCCH Timing SFN",    0},       // 10 bits
+        {UINT,        "Num PDCCH Results",   4},    // 3 bits
+        {PLACEHOLDER, "Num PHICH Results",   0},    // 3 bits
+        {PLACEHOLDER, "PDCCH Timing SFN",    0},    // 10 bits
         {PLACEHOLDER, "PDCCH Timing Sub-FN", 0},    // 4 bits
 };
 
 const Fmt LtePdcchPhichIndicationReport_Record_v42_phich[] = {
-        {UINT,        "Cell Index",       4},                    // 3 bits
-        {PLACEHOLDER, "PHICH Included",   0},         // 1 bit
-        {PLACEHOLDER, "PHICH 1 Included", 0},       // 1 bit
-        {PLACEHOLDER, "PHICH Value",      0},            // 1 bit
-        {PLACEHOLDER, "PHICH 1 Value",    0},          // 1 bit
+        {UINT,        "Cell Index",       4},    // 3 bits
+        {PLACEHOLDER, "PHICH Included",   0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Included", 0},    // 1 bit
+        {PLACEHOLDER, "PHICH Value",      0},    // 1 bit
+        {PLACEHOLDER, "PHICH 1 Value",    0},    // 1 bit
 };
 
 const Fmt LtePdcchPhichIndicationReport_Record_v42_pdcch[] = {
         // PDCCH Info
-        {UINT,        "Serv Cell Idx",     2},                 // 3 bits
-        {PLACEHOLDER, "RNTI Type",         0},              // 4 bits
-        {PLACEHOLDER, "Payload Size",      0},           // 7 bits
-        {PLACEHOLDER, "Aggregation Level", 0},      // 2 bits
-        {UINT,        "Search Space",      2},                  // 1 bit
-        {PLACEHOLDER, "SPS Grant Type",    0},         // 3 bits
-        {PLACEHOLDER, "New DL Tx",         0},              // 1 bit
-        {PLACEHOLDER, "Num DL Trblks",     0},          // 2 bits
+        {UINT,        "Serv Cell Idx",     2},    // 3 bits
+        {PLACEHOLDER, "RNTI Type",         0},    // 4 bits
+        {PLACEHOLDER, "Payload Size",      0},    // 7 bits
+        {PLACEHOLDER, "Aggregation Level", 0},    // 2 bits
+        {UINT,        "Search Space",      2},    // 1 bit
+        {PLACEHOLDER, "SPS Grant Type",    0},    // 3 bits
+        {PLACEHOLDER, "New DL Tx",         0},    // 1 bit
+        {PLACEHOLDER, "Num DL Trblks",     0},    // 2 bits
 
         {UINT,        "S0 Index",          4},    // shift 0 bits,total 5 bits
         {PLACEHOLDER, "S1 Index",          0},    // shift 5 bits,total 5 bits
@@ -3785,7 +3785,7 @@ const ValueName ValueNameRNTIType[] = {
 const ValueName ValueNameDCIFormat[] = {
         // 4 bits
         // Release 8
-        // http://www.sharetechnote.com/html/LTE_Advanced_DCI.html
+        // http:    //www.sharetechnote.com/html/LTE_Advanced_DCI.html
         {0,  "Format 0"},
         {1,  "Format 1"},
         {2,  "Format 1A"},
@@ -4175,7 +4175,7 @@ const Fmt ModemDebug_Fmt[] = {
 
 bool is_log_packet(const char *b, size_t length);
 
-bool is_debug_packet(const char *b, size_t length);   //Yuanjie: test if it's a debugging message
+bool is_debug_packet(const char *b, size_t length);    //Yuanjie: test if it's a debugging message
 
 // Given a binary string, try to decode it as a log packet.
 // Return a specially formatted Python list that stores the decoding result.
@@ -4187,4 +4187,4 @@ void on_demand_decode(const char *b, size_t length, LogPacketType type_id, PyObj
 
 PyObject *decode_log_packet_modem(const char *b, size_t length, bool skip_decoding);
 
-#endif  // __DM_COLLECTOR_C_LOG_PACKET_H__
+#endif    // __DM_COLLECTOR_C_LOG_PACKET_H__
