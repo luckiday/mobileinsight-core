@@ -219,7 +219,7 @@ const Fmt LteRrcOtaPacketFmt[] = {
         {UINT, "RRC Release Number", 1},    //RRC release version
         {UINT, "Major/minor",        1},
         {UINT, "Radio Bearer ID",    1},    //no change
-        {UINT, "Physical Cell ID",   2}    //Cell ID
+        {UINT, "Physical Cell ID",   2}     //Cell ID
         // continued in LteRrcOtaPacketFmt_v2 or LteRrcOtaPacketFmt_v7
 };
 
