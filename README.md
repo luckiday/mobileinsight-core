@@ -18,7 +18,9 @@ Currently MobileInsight supports installation on macOS and Ubuntu/Debian systems
 
 First clone or download the git repository to user local folder.
 
-
+[Optional] Create a python3 virtual environment to install MobileInsight.
+Please refer to https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/ about virtual environments. 
+**Note:** **don't** use *Conda* to create the environment. 
 
 Next, run installation script (but __do not__ execute with root priviledge!):
 
